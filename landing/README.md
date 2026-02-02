@@ -13,7 +13,7 @@ Professional marketing website for Zentinel AI Surveillance Platform
 
 2. **Login Credentials**:
    - Email: `admin@gmail.com`
-   - Password: `SAng12!?`
+   - Password: `S`
 
 ## Structure
 
