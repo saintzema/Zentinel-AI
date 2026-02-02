@@ -51,6 +51,13 @@ backend/data/recordings/*
 !backend/data/uploads/.gitkeep
 !backend/data/recordings/.gitkeep
 
+# Large Media Files (Standardizes exclusion, use 'git add -f' for exceptions)
+*.mov
+*.mp4
+*.avi
+*.mkv
+!landing/assets/videos/hero-demo.mov
+
 # Node.js
 node_modules/
 npm-debug.log*
