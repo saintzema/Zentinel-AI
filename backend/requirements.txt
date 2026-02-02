@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+python-multipart
+sqlalchemy
+opencv-python-headless
+ultralytics
+pydantic
+pydantic-settings
+requests
+websockets
+python-dotenv
+google-generativeai
+psutil
+lapx
+loguru

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZentinelOS | Command</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body { background-color: #0f172a; color: #e2e8f0; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        #map { height: 600px; width: 100%; border-radius: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div id="app" class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="glass p-4 border-b border-slate-700 flex justify-between items-center z-50">
+            <h1 class="text-2xl font-bold tracking-widest text-emerald-400">ZENTINEL<span class="text-white">OS</span></h1>
+            <div class="flex gap-4">
+                <button @click="toggleSystem" :class="sysStatus ? 'bg-red-500 hover:bg-red-600' : 'bg-emerald-500 hover:bg-emerald-600'" class="px-4 py-2 rounded font-bold text-black transition">
+                    {{ sysStatus ? 'DISENGAGE' : 'ACTIVATE SYSTEM' }}
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Grid -->
+        <main class="flex-1 p-4 grid grid-cols-12 gap-4">
+            
+            <!-- Sidebar: Assets & Zones -->
+            <div class="col-span-3 space-y-4">
+                <div class="glass p-4 rounded h-full">
+                    <h2 class="text-sm font-bold text-slate-400 mb-4 uppercase">Assets</h2>
+                    <ul class="space-y-2">
+                        <li class="p-2 bg-slate-800 rounded flex items-center justify-between border-l-2 border-emerald-500">
+                            <span>Camera 01 (Main)</span>
+                            <span class="text-xs text-emerald-400">ONLINE</span>
+                        </li>
+                    </ul>
+                    
+                    <h2 class="text-sm font-bold text-slate-400 mt-8 mb-4 uppercase">Active Zones</h2>
+                    <div v-for="zone in zones" :key="zone.id" class="p-2 bg-slate-800 rounded mb-2 border-l-2" :class="zone.type == 'restricted' ? 'border-red-500' : 'border-blue-500'">
+                        {{ zone.name }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Map -->
+            <div class="col-span-6">
+                <div class="glass p-1 rounded h-full relative">
+                    <div id="map" class="z-0"></div>
+                    <!-- Overlays could go here -->
+                </div>
+            </div>
+
+            <!-- Event Feed -->
+            <div class="col-span-3">
+                <div class="glass p-4 rounded h-full flex flex-col">
+                    <h2 class="text-sm font-bold text-slate-400 mb-4 uppercase">Intelligence Feed</h2>
+                    <div class="flex-1 overflow-y-auto space-y-2">
+                        <div v-for="event in events" :key="event.id" class="p-3 rounded bg-slate-800 border-l-4" :class="event.severity == 'critical' ? 'border-red-500' : 'border-yellow-500'">
+                            <div class="flex justify-between items-start">
+                                <span class="font-bold text-sm">{{ event.title }}</span>
+                                <span class="text-xs text-slate-500">{{ new Date(event.timestamp).toLocaleTimeString() }}</span>
+                            </div>
+                            <p class="text-xs text-slate-300 mt-1">{{ event.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const { createApp, ref, onMounted } = Vue;
+
+        createApp({
+            setup() {
+                const sysStatus = ref(false);
+                const events = ref([]);
+                const zones = ref([]);
+                let map = null;
+                let ws = null;
+                let markers = {}; // ID -> Marker
+
+                const initMap = () => {
+                    map = L.map('map').setView([6.5244, 3.3792], 13); // Lagos, Nigeria
+                    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+                        subdomains: 'abcd',
+                        maxZoom: 20
+                    }).addTo(map);
+                };
+
+                const connectWS = () => {
+                    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+                    ws = new WebSocket(`${protocol}//${window.location.host}/api/v1/ws`);
+
+                    ws.onmessage = (msg) => {
+                        const payload = JSON.parse(msg.data);
+                        
+                        if (payload.type === 'event') {
+                            events.value.unshift(payload.data);
+                        } else if (payload.type === 'tracks') {
+                            updateTracks(payload.data);
+                        }
+                    };
+                    
+                    ws.onclose = () => {
+                        console.log("WS Closed. Reconnecting...");
+                        setTimeout(connectWS, 1000);
+                    };
+                };
+
+                const updateTracks = (tracks) => {
+                     // Simple marker update logic
+                     // Clear old markers that aren't in tracks? 
+                     // For MVP just creating/moving markers
+                     const currentIds = new Set(tracks.map(t => t.id));
+                     
+                     // Remove missing
+                     for (let id in markers) {
+                         if (!currentIds.has(parseInt(id))) {
+                             map.removeLayer(markers[id]);
+                             delete markers[id];
+                         }
+                     }
+
+                     tracks.forEach(t => {
+                         const center = t.bbox; // Actually bbox... wait, we need geo-coordinates.
+                         // For MVP I don't have geo-registration yet.
+                         // I will map pixel coordinates to a fake map area for demo.
+                         // Let's assume 1920x1080 -> 0.01 deg lat/lon
+                         
+                         // Mocking pixel->geo projection
+                         const lat = 6.5244 + (1080 - (t.bbox[1]+t.bbox[3])/2)/100000;
+                         const lon = 3.3792 + ((t.bbox[0]+t.bbox[2])/2)/100000;
+                         
+                         if (markers[t.id]) {
+                             markers[t.id].setLatLng([lat, lon]);
+                         } else {
+                             markers[t.id] = L.circleMarker([lat, lon], {
+                                 color: t.label === 'person' ? '#ef4444' : '#3b82f6',
+                                 radius: 5
+                             }).bindTooltip(`#${t.id} ${t.label}`).addTo(map);
+                         }
+                     });
+                };
+
+                const toggleSystem = async () => {
+                    if (sysStatus.value) {
+                        await fetch('/api/v1/stop', { method: 'POST' });
+                        sysStatus.value = false;
+                    } else {
+                        await fetch('/api/v1/start', { method: 'POST' });
+                        sysStatus.value = true;
+                    }
+                };
+                
+                const fetchZones = async () => {
+                    const res = await fetch('/api/v1/zones');
+                    if (res.ok) zones.value = await res.json();
+                };
+
+                onMounted(() => {
+                    initMap();
+                    connectWS();
+                    fetchZones();
+                });
+
+                return { sysStatus, events, zones, toggleSystem };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

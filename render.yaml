@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: zentinel-os
+    env: docker
+    plan: starter
+    region: oregon
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
