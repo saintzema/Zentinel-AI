@@ -5,6 +5,8 @@ services:
     plan: starter
     region: oregon
     envVars:
+      - key: PORT
+        value: 10000
       - key: DATABASE_URL
         sync: false
       - key: GEMINI_API_KEY
