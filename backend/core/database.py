@@ -6,11 +6,16 @@ import os
 # Ensure data directory exists
 os.makedirs("backend/data", exist_ok=True)
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./backend/data/zentinel.db"
+from backend.core.config import settings
 
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
-)
+# Use settings.DATABASE_URL if provided (e.g., for PostgreSQL on Render)
+# Fallback to local SQLite for development
+SQLALCHEMY_DATABASE_URL = settings.DATABASE_URL or "sqlite:///./backend/data/zentinel.db"
+
+# SQLite requires specific connect_args, Postgres does not
+engine_args = {"connect_args": {"check_same_thread": False}} if SQLALCHEMY_DATABASE_URL.startswith("sqlite") else {}
+
+engine = create_engine(SQLALCHEMY_DATABASE_URL, **engine_args)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
