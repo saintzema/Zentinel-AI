@@ -1,0 +1,11 @@
+backend/
+frontend/
+venv/
+node_modules/
+runs/
+*.pt
+*.mp4
+*.mov
+__pycache__/
+*.pyc
+.DS_Store
