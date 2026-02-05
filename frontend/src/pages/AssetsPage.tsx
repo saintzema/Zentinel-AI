@@ -1,4 +1,4 @@
-import { Server, Cpu, HardDrive, Wifi, Shield, Battery, Radio, Camera, Activity, Globe, Zap, AlertCircle, Link } from 'lucide-react';
+import { Server, HardDrive, Shield, Radio, Camera, Activity, Globe, Zap, AlertCircle, Link } from 'lucide-react';
 import { useState } from 'react';
 import OnboardingWizard from '../components/OnboardingWizard';
 

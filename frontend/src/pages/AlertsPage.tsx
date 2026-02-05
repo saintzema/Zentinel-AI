@@ -6,7 +6,8 @@ interface AlertsPageProps {
 }
 
 export default function AlertsPage({ events }: AlertsPageProps) {
-    const alerts = events.filter(e => e.type === 'zone_intrusion' || e.type === 'anomaly');
+    // Filter based on severity instead of type (which doesn't exist on Event)
+    const alerts = events.filter(e => e.severity === 'critical' || e.severity === 'warning');
 
     return (
         <div className="h-full p-4 space-y-4 overflow-y-auto custom-scrollbar">
@@ -39,18 +40,18 @@ export default function AlertsPage({ events }: AlertsPageProps) {
                             <div className="space-y-2 text-xs font-mono text-slate-400">
                                 <div className="flex justify-between border-b border-slate-800 pb-1">
                                     <span>TYPE</span>
-                                    <span className="text-slate-200">{alert.type}</span>
+                                    <span className="text-slate-200">{alert.severity.toUpperCase()}</span>
                                 </div>
-                                {alert.zoneId && (
+                                {alert.zone_id && (
                                     <div className="flex justify-between border-b border-slate-800 pb-1">
                                         <span>ZONE ID</span>
-                                        <span className="text-slate-200">{alert.zoneId}</span>
+                                        <span className="text-slate-200">{alert.zone_id}</span>
                                     </div>
                                 )}
-                                {alert.trackId && (
+                                {alert.track_id && (
                                     <div className="flex justify-between border-b border-slate-800 pb-1">
                                         <span>TARGET ID</span>
-                                        <span className="text-slate-200">{alert.trackId}</span>
+                                        <span className="text-slate-200">{alert.track_id}</span>
                                     </div>
                                 )}
                             </div>
