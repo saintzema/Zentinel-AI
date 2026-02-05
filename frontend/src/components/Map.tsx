@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { GoogleMap, useJsApiLoader, Marker, Polygon } from '@react-google-maps/api';
-import { Locate, Layers, Navigation, MapPin, Crosshair, Plus, Minus, Compass, Target, Battery } from 'lucide-react';
+import { Navigation, Crosshair, Plus, Minus, Compass, Target, Battery } from 'lucide-react';
 import type { Track, Zone } from '../types';
 
 interface TacticalMapProps {
@@ -86,7 +86,6 @@ export default function TacticalMap({ tracks, zones }: TacticalMapProps) {
     const mapRef = useRef<google.maps.Map | null>(null);
     const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
     const [drones, setDrones] = useState<Drone[]>([]);
-    const [locating, setLocating] = useState(false);
     const [mapType, setMapType] = useState<MapTypeId>('roadmap');
     const [center, setCenter] = useState(defaultCenter);
     const [zoom, setZoom] = useState(13);
@@ -114,10 +113,8 @@ export default function TacticalMap({ tracks, zones }: TacticalMapProps) {
     }, []);
 
     const handleLocate = () => {
-        setLocating(true);
         if (!navigator.geolocation) {
             alert("Geolocation not supported by your device.");
-            setLocating(false);
             return;
         }
 
@@ -130,7 +127,6 @@ export default function TacticalMap({ tracks, zones }: TacticalMapProps) {
                 setUserPos(pos);
                 setCenter(pos);
                 setZoom(16);
-                setLocating(false);
 
                 if (mapRef.current) {
                     mapRef.current.panTo(pos);
@@ -139,7 +135,6 @@ export default function TacticalMap({ tracks, zones }: TacticalMapProps) {
             },
             (error) => {
                 console.error("Geolocation error:", error);
-                setLocating(false);
             },
             { enableHighAccuracy: true }
         );

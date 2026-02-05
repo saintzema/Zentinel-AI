@@ -121,7 +121,7 @@ export function useSound(options: UseSoundOptions = {}) {
         playBeep(type);
     }, [enabled, playBeep]);
 
-    const setVolume = useCallback((newVolume: number) => {
+    const setVolume = useCallback((_newVolume: number) => {
         // Placeholder if needed later
     }, []);
 

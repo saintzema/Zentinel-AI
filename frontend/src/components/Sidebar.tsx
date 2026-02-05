@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
     LayoutDashboard, Map as MapIcon, Video, Activity, AlertTriangle,
-    Zap, HardDrive, BarChart3, Bot, MonitorPlay, Settings, Sun,
-    ChevronLeft, ChevronRight, Server, Target, Shield
+    HardDrive, BarChart3, Bot, MonitorPlay, Settings, Sun,
+    ChevronLeft, ChevronRight, Target, Shield
 } from 'lucide-react';
 
 interface SidebarProps {

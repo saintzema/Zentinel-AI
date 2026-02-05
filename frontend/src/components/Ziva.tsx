@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX, Send, Bot, Activity } from 'lucide-react';
 import { useSound } from '../hooks/useSound';
 import { useDetections } from '../hooks/useDetections';
+import { getApiUrl } from '../utils/api';
 
 interface Message {
     role: 'user' | 'assistant';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Monitor, Shield, Cpu, CheckCircle, Wifi, Camera, AlertTriangle, ArrowRight, Loader2 } from 'lucide-react';
+import { Search, Shield, Cpu, CheckCircle, Wifi, Camera, AlertTriangle, ArrowRight, Loader2 } from 'lucide-react';
 
 interface Discovery {
     id: string;
@@ -105,8 +105,8 @@ export default function OnboardingWizard({ onComplete }: { onComplete: () => voi
                                     key={device.id}
                                     onClick={() => toggleDevice(device.id)}
                                     className={`p-4 rounded-lg border transition-all flex items-center gap-4 text-left ${selectedIds.includes(device.id)
-                                            ? 'bg-emerald-500/10 border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.1)]'
-                                            : 'bg-slate-800/40 border-slate-700 hover:border-slate-500'
+                                        ? 'bg-emerald-500/10 border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.1)]'
+                                        : 'bg-slate-800/40 border-slate-700 hover:border-slate-500'
                                         }`}
                                 >
                                     <div className={`p-2 rounded-md ${selectedIds.includes(device.id) ? 'bg-emerald-500 text-white' : 'bg-slate-700 text-slate-400'}`}>
