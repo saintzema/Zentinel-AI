@@ -116,7 +116,7 @@ export default function CommandCenter() {
                 <div>
                     <h2 className="text-2xl font-bold text-white flex items-center gap-3">
                         <Shield className="text-emerald-500 w-8 h-8" />
-                        COMMAND CENTER_V1.0
+                        ZentinelAI_V1.0
                     </h2>
                     <p className="text-slate-500 text-sm mt-1 font-mono uppercase tracking-widest">
                         Zentinel-OS Sovereign System Control

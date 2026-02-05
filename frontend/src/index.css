@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
 :root {
   background-color: #020617;
   /* Slate 950/Black */
@@ -265,4 +267,10 @@ body {
   background: rgba(15, 23, 42, 0.4);
   backdrop-filter: blur(12px) brightness(1.2);
   border-left: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.brand-text {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.15em;
+  font-weight: 700;
 }

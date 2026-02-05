@@ -209,7 +209,7 @@ export default function IntelligenceDashboard() {
                     <p className="text-slate-500 text-xs font-mono mt-1">Real-time tactical awareness</p>
                 </div>
                 <div className="text-right">
-                    <div className="text-emerald-400 font-mono text-sm">ZENTINEL ACTIVE</div>
+                    <div className="text-emerald-400 font-mono text-sm brand-text">ZentinelAI ACTIVE</div>
                     <div className="text-slate-600 text-xs font-mono">{new Date().toLocaleString()}</div>
                 </div>
             </div>

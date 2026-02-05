@@ -123,8 +123,8 @@ export default function LandingPage() {
                         <Shield size={64} className="text-emerald-500 mx-auto animate-pulse" />
                         <Activity size={24} className="absolute inset-0 m-auto text-slate-900 animate-[spin-reverse-fast_4s_linear_infinite]" />
                     </div>
-                    <h1 className="text-4xl font-black tracking-[0.3em] text-white glitch-text">
-                        ZENTINEL<span className="text-emerald-600">OS</span>
+                    <h1 className="text-4xl font-black tracking-[0.1em] text-white glitch-text brand-text">
+                        Zentinel<span className="text-emerald-600">AI</span>
                     </h1>
                     <div className="flex items-center justify-center gap-2 text-xs text-emerald-500/60 tracking-widest uppercase">
                         <Globe size={12} /> Global Surveillance Network

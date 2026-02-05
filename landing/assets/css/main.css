@@ -1,6 +1,8 @@
 /* Zentinel Landing Page - Enterprise Grade Design System */
 /* Inspired by SpaceX, Anduril, Tesla minimalist aesthetics */
 
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
 /* ==================== CSS VARIABLES ==================== */
 :root {
     /* Brand Colors - Minimal Cyan Theme */
@@ -22,6 +24,7 @@
     /* Typography */
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-mono: 'Fira Code', 'Courier New', monospace;
+    --font-brand: 'Orbitron', sans-serif;
 
     /* Spacing */
     --spacing-xs: 0.5rem;
@@ -126,6 +129,12 @@ p {
     line-height: 1.75;
     font-weight: 300;
     max-width: 650px;
+}
+
+.brand-text {
+    font-family: var(--font-brand);
+    letter-spacing: 0.1em;
+    font-weight: 700;
 }
 
 /* ==================== LAYOUT ==================== */
