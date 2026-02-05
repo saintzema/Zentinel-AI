@@ -1,4 +1,4 @@
-import { Play, Activity, SkipForward, Shield, LayoutDashboard, Database, Target, MonitorPlay, Info, AlertCircle } from 'lucide-react';
+import { Play, Activity, SkipForward, Shield, LayoutDashboard, Database, Target, MonitorPlay, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,4 +1,4 @@
-import { Shield, Server, Database, Wifi, Battery, AlertTriangle, Settings, Play, Pause, Square, Cpu, HardDrive, MapPin, Monitor, Smartphone, Camera, Radio } from 'lucide-react';
+import { Shield, Server, Database, Wifi, Battery, AlertTriangle, Play, Pause, Cpu, HardDrive, MapPin, Monitor, Smartphone, Camera, Radio } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 interface Device {

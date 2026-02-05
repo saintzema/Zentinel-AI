@@ -1,4 +1,4 @@
-import { Map as MapIcon, Shield, ShieldAlert, Crosshair, Navigation, Layers, Bell, Activity, Target, Trash2 } from 'lucide-react';
+import { Shield, ShieldAlert, Crosshair, Navigation, Layers, Bell, Activity, Target, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import TacticalMap from '../components/Map';
 import type { Zone, Track } from '../types';

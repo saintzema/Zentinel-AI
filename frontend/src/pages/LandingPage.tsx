@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Lock, Activity, ChevronRight, Terminal, Globe, Cpu } from 'lucide-react';
+import { Shield, Lock, Activity, ChevronRight, Terminal, Globe } from 'lucide-react';
 import { useSound } from '../hooks/useSound';
 
 export default function LandingPage() {
@@ -8,7 +8,6 @@ export default function LandingPage() {
     const [code, setCode] = useState('');
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [textIndex, setTextIndex] = useState(0);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const { playSound } = useSound();
 
@@ -77,7 +76,6 @@ export default function LandingPage() {
         const interval = setInterval(() => {
             if (currentText < texts.length) {
                 if (charIndex <= texts[currentText].length) {
-                    setTextIndex(prev => prev + 1); // Mock state update to trigger render
                     charIndex++;
                 } else {
                     currentText++;
@@ -102,7 +100,7 @@ export default function LandingPage() {
             } else {
                 setError(true);
                 setCode('');
-                playSound('alert'); // Assuming alert sound exists or generic beep
+                playSound('alert_high'); // Assuming alert sound exists or generic beep
                 setLoading(false);
             }
         }, 1500);
@@ -216,11 +214,3 @@ export default function LandingPage() {
         </div>
     );
 }
-
-// Ensure strict mode via CSS for shake animation if not present
-const styles = `
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
-}`;

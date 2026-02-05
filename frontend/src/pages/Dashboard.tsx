@@ -4,7 +4,7 @@ import IntelligenceDashboard from '../components/IntelligenceDashboard';
 import EventFeed from '../components/EventFeed';
 import ZivaAssistant from '../components/Ziva';
 import type { Event } from '../types';
-import { Menu, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Menu, ChevronRight } from 'lucide-react';
 
 interface DashboardPageProps {
   active: boolean;
