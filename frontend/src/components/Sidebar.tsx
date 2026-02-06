@@ -15,19 +15,19 @@ export default function Sidebar({ open, setOpen }: SidebarProps) {
     const location = useLocation();
 
     const menuItems = [
-        { icon: LayoutDashboard, label: 'Connected Dashboard', path: '/' },
-        { icon: MapIcon, label: 'Live Map', path: '/map' },
-        { icon: Video, label: 'Events', path: '/events' },
-        { icon: Activity, label: 'Tracks', path: '/tracks' },
-        { icon: AlertTriangle, label: 'Alerts', path: '/alerts' },
-        { icon: Shield, label: 'Command Center', path: '/command-center' },
-        { icon: Target, label: 'Pipeline Training', path: '/pipeline-training' },
-        { icon: MapIcon, label: 'Zones', path: '/zones' },
-        { icon: HardDrive, label: 'Assets', path: '/assets' },
-        { icon: BarChart3, label: 'Analytics', path: '/analytics' },
-        { icon: Bot, label: 'AI Assistant', path: '/ai-assistant' },
-        { icon: MonitorPlay, label: 'Demo Mode', path: '/demo-portal' },
-        { icon: Settings, label: 'Settings', path: '/settings' },
+        { icon: LayoutDashboard, label: 'Connected Dashboard', path: '/app' },
+        { icon: MapIcon, label: 'Live Map', path: '/app/map' },
+        { icon: Video, label: 'Events', path: '/app/events' },
+        { icon: Activity, label: 'Tracks', path: '/app/tracks' },
+        { icon: AlertTriangle, label: 'Alerts', path: '/app/alerts' },
+        { icon: Shield, label: 'Command Center', path: '/app/command-center' },
+        { icon: Target, label: 'Pipeline Training', path: '/app/pipeline-training' },
+        { icon: MapIcon, label: 'Zones', path: '/app/zones' },
+        { icon: HardDrive, label: 'Assets', path: '/app/assets' },
+        { icon: BarChart3, label: 'Analytics', path: '/app/analytics' },
+        { icon: Bot, label: 'AI Assistant', path: '/app/ai-assistant' },
+        { icon: MonitorPlay, label: 'Demo Mode', path: '/app/demo-portal' },
+        { icon: Settings, label: 'Settings', path: '/app/settings' },
     ];
 
     return (

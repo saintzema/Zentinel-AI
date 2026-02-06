@@ -96,7 +96,7 @@ export default function LandingPage() {
             if (code === secureCode) {
                 playSound('activation');
                 localStorage.setItem('zentinel_auth', 'true');
-                navigate('/dashboard');
+                navigate('/app');
             } else {
                 setError(true);
                 setCode('');

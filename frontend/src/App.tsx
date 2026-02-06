@@ -224,7 +224,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route
-          path="/*"
+          path="/app/*"
           element={
             <RequireAuth>
               <ProtectedSystem />
