@@ -721,7 +721,54 @@ p {
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 1024px) {
 
-    .hero-content,
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* 
+       To visually place video between text and stats on mobile, 
+       we'd typically need a DOM change. 
+       For now, we place the visual immediately after the text block.
+       If specific Text -> Video -> Stats ordering is strictly required 
+       without DOM changes, we'd need `display: contents` on `.hero-text`.
+    */
+    .hero-text {
+        display: contents;
+        /* Flattens children into the parent flex container */
+    }
+
+    /* Now we have: h1, p, .flex (buttons), .hero-stats, .hero-visual direct children of .hero-content flex col */
+
+    .hero-text>h1 {
+        order: 1;
+    }
+
+    .hero-text>.hero-subtitle {
+        order: 2;
+    }
+
+    .hero-visual {
+        order: 3;
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    .hero-text>.flex {
+        order: 4;
+        justify-content: center;
+    }
+
+    /* Buttons */
+    .hero-text>.hero-stats {
+        order: 5;
+        border-top: none;
+        padding-top: 1rem;
+        margin-top: 1rem;
+        justify-content: center;
+    }
+
     .industry-showcase {
         grid-template-columns: 1fr;
         gap: 3rem;

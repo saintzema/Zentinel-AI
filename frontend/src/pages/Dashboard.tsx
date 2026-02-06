@@ -18,9 +18,9 @@ export default function DashboardPage({ active, simulation, events = [], setSour
   const [showIntelligence, setShowIntelligence] = useState(false);
 
   return (
-    <div className="flex gap-4 h-full overflow-hidden relative">
+    <div className="flex flex-col lg:flex-row gap-4 h-full overflow-hidden relative">
       {/* Main Content Area */}
-      <div className={`flex flex-col gap-4 h-full overflow-y-auto pr-2 custom-scrollbar transition-all duration-500 ease-in-out ${isExpanded ? 'w-full' : 'w-full xl:w-3/4'
+      <div className={`flex flex-col gap-4 h-full overflow-y-auto pr-2 custom-scrollbar transition-all duration-500 ease-in-out w-full ${isExpanded ? '' : 'xl:w-3/4'
         }`}>
         {/* Video Player */}
         <div className={`w-full shrink-0 relative corner-border p-1 bg-slate-900/30 transition-all duration-500 ${isExpanded ? 'aspect-[21/9]' : 'aspect-video'
@@ -42,7 +42,7 @@ export default function DashboardPage({ active, simulation, events = [], setSour
 
       {/* Right Sidebar - Events & AI Assistant */}
       {!isExpanded ? (
-        <div className="w-full xl:w-1/4 flex flex-col gap-4 h-full overflow-hidden animate-in slide-in-from-right duration-500">
+        <div className="w-full xl:w-1/4 flex flex-col gap-4 h-full overflow-hidden animate-in slide-in-from-right duration-500 hidden xl:flex">
           <div className="h-[400px] corner-border p-0 flex flex-col bg-slate-900/40 overflow-hidden">
             <EventFeed events={events} />
           </div>
